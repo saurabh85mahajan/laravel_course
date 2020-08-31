@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Story;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoryRequest;
-use Illuminate\Support\Facades\Gate;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewStoryNotification;
 
 class StoriesController extends Controller
 {
@@ -13,7 +15,6 @@ class StoriesController extends Controller
     {
         $this->authorizeResource(Story::class, 'story');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +55,9 @@ class StoriesController extends Controller
     public function store(StoryRequest $request)
     {
         //
-        auth()->user()->stories()->create($request->all());
+        $story = auth()->user()->stories()->create($request->all());
+
+        Mail::send(new NewStoryNotification($story->title));
 
         return redirect()->route('stories.index')->with('status', 'Story Created Successfully!');
     }
@@ -82,8 +85,6 @@ class StoriesController extends Controller
     public function edit(Story $story)
     {
         //
-        // Gate::authorize('edit-story', $story);
-        // $this->authorize('update', $story);
         return view('stories.edit', [
             'story' => $story
         ]);
