@@ -31,6 +31,7 @@ class StoriesController extends Controller
     public function create()
     {
         //
+        return view('stories.create');
     }
 
     /**
@@ -42,6 +43,13 @@ class StoriesController extends Controller
     public function store(Request $request)
     {
         //
+        auth()->user()->stories()->create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'type' => $request->type,
+            'status' => $request->status,
+        ]);
+        return redirect()->route('stories.index')->with('status', 'Story Created Successfully!');
     }
 
     /**
