@@ -31,7 +31,10 @@ class StoriesController extends Controller
     public function create()
     {
         //
-        return view('stories.create');
+        $story = new Story;
+        return view('stories.create', [
+            'story' => $story
+        ]);
     }
 
     /**
