@@ -1,3 +1,9 @@
-<h1>Welcome to Test 2 Page</h1>
+@extends('layouts.demo')
 
-{{ $foo }}
+@section('content')
+
+    <h1>Welcome to Test 2 Page</h1>
+
+    {{ $foo }}
+
+@endsection

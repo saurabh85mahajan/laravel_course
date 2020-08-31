@@ -1,5 +1,10 @@
-<h1>Welcome to Test 1 Page</h1>
+@extends('layouts.demo')
 
-{{ $foo }}
+@section('content')
+    <h1>Welcome to Test 1 Page</h1>
 
-{{ $haystack }}
+    {{ $foo }}
+
+    {{ $haystack }}
+
+@endsection
