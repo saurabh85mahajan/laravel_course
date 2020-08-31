@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,8 @@ Route::get('/story/{activeStory:slug}', 'DashboardController@show')->name('dashb
 
 Route::get('/email', 'DashboardController@email')->name('dashboard.email');
 
-Route::namespace('Admin')->prefix('admin')->group( function() {
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/deleted_stories', 'StoriesController@index')->name('admin.stories.index');
+    Route::put('/stories/restore/{id}', 'StoriesController@restore')->name('admin.stories.restore');
+    Route::delete('/stories/delete/{id}', 'StoriesController@delete')->name('admin.stories.delete');
 });
