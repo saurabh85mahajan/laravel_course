@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'Auth\LoginController@showLoginForm');
+// Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Route::middleware(['auth'])->group(function () {
     // Route::get('/stories', 'StoriesController@index')->name('stories.index');
@@ -29,3 +29,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::get('/', 'DashboardController@index')->name('dashboard.index');
+Route::get('/story/{activeStory}', 'DashboardController@show')->name('dashboard.show');
