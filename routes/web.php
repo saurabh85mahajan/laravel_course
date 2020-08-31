@@ -33,3 +33,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard.index');
 Route::get('/story/{activeStory:slug}', 'DashboardController@show')->name('dashboard.show');
 
 Route::get('/email', 'DashboardController@email')->name('dashboard.email');
+
+Route::namespace('Admin')->prefix('admin')->group( function() {
+    Route::get('/deleted_stories', 'StoriesController@index')->name('admin.stories.index');
+});
