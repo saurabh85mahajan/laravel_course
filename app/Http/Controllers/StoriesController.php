@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\StoryCreated;
 use App\Events\StoryEdited;
 use App\Story;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoryRequest;
 
@@ -28,6 +29,7 @@ class StoriesController extends Controller
     {
         //
         $stories = Story::where('user_id', auth()->user()->id)
+            ->with('tags')
             ->orderBy('id', 'DESC')
             ->paginate(3);
         return view('stories.index', [
@@ -45,8 +47,11 @@ class StoriesController extends Controller
         //
         // $this->authorize('create');
         $story = new Story;
+        $tags = Tag::get();
+
         return view('stories.create', [
-            'story' => $story
+            'story' => $story,
+            'tags' => $tags,
         ]);
     }
 
@@ -66,6 +71,7 @@ class StoriesController extends Controller
         if ($request->hasFile('image')) {
             $this->_uploadImage($request, $story);
         }
+        $story->tags()->sync($request->tags);
 
         event(new StoryCreated($story->title));
 
@@ -95,8 +101,10 @@ class StoriesController extends Controller
     public function edit(Story $story)
     {
         //
+        $tags = Tag::get();
         return view('stories.edit', [
-            'story' => $story
+            'story' => $story,
+            'tags' => $tags
         ]);
     }
 
@@ -116,6 +124,7 @@ class StoriesController extends Controller
         if ($request->hasFile('image')) {
             $this->_uploadImage($request, $story);
         }
+        $story->tags()->sync($request->tags);
 
         event(new StoryEdited($story->title));
 

@@ -17,6 +17,9 @@
 
                     <p class="font-italic">{{ $story->footnote}}</p> -->
                     <p class="card-text">{{ $story->body }}</p>
+                    @foreach( $story->tags as $tag)
+                        <button class="btn btn-sm btn-outline-primary">{{$tag->name}}</button>
+                    @endforeach
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-outline-secondary">{{$story->user->name}}</button>
