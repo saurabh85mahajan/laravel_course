@@ -1,3 +1,9 @@
+@if ($message = Session::get('error'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+ @endif
+ 
 <div class="form-group">
     <label for="title">Title</label>
     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $story->title ) }} " />
@@ -51,4 +57,15 @@
         <strong>{{ $message }} </strong>
     </span>
     @enderror
+</div>
+
+<div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" />
+    @error('image')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }} </strong>
+    </span>
+    @enderror
+    <img src="{{ $story->thumbnail}}" alt="image" />
 </div>
