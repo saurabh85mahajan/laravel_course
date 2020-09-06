@@ -20,4 +20,18 @@ class StoriesController extends Controller
             'stories' => $stories
         ]);
     }
+
+    public function restore($id)
+    {
+        $story = Story::withTrashed()->findOrFail($id);
+        $story->restore();
+        return redirect()->route('admin.stories.index')->with('status', 'Story Restored Successfully!');
+    }
+
+    public function delete($id)
+    {
+        $story = Story::withTrashed()->findOrFail($id);
+        $story->forceDelete();
+        return redirect()->route('admin.stories.index')->with('status', 'Story Deleted Successfully!');
+    }
 }
