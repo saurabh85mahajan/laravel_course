@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('activeStory', function ($slug) {
-            return \App\Story::where('slug', $slug)->where('status', 1)->firstOrFail();
+            return \App\Models\Story::where('slug', $slug)->where('status', 1)->firstOrFail();
         });
     }
 

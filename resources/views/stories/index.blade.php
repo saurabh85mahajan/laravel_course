@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Stories
-                    @can('create', App\Story::class)
+                    @can('create', App\Models\Story::class)
                         <a href=" {{ route('stories.create')}} " class="float-right">Add Story</a>
                     @endcan
                 </div>

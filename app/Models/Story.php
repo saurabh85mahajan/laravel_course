@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,12 +24,12 @@ class Story extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function tags()
     {
-        return $this->belongsToMany(\App\Tag::class);
+        return $this->belongsToMany(\App\Models\Tag::class);
     }
 
     protected static function booted()
