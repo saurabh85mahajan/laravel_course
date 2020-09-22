@@ -73,7 +73,7 @@ class StoriesController extends Controller
         }
         $story->tags()->sync($request->tags);
 
-        event(new StoryCreated($story->title));
+        // event(new StoryCreated($story->title));
 
         return redirect()->route('stories.index')->with('status', 'Story Created Successfully!');
     }
@@ -126,7 +126,7 @@ class StoriesController extends Controller
         }
         $story->tags()->sync($request->tags);
 
-        event(new StoryEdited($story->title));
+        // event(new StoryEdited($story->title));
 
         return redirect()->route('stories.index')->with('status', 'Story Updated Successfully!');
     }
