@@ -61,6 +61,7 @@
                                     <a class="dropdown-item" href="{{ route('stories.index') }}">Stories</a>
                                     @if( Auth::user()->type == 1)
                                         <a class="dropdown-item" href="{{ route('admin.stories.index') }}">Deleted Stories</a>
+                                        <a class="dropdown-item" href="{{ route('admin.stories.stats') }}">Stats</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
