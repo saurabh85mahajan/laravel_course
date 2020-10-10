@@ -61,5 +61,12 @@
             </div>
         </div>
     </div>
+
+    <x-alert message="This is First Component" />
+    <hr />
+    <x-alert message="This is Second Component" class="w-25 alert-danger" />
+    <hr />
+    <x-alert message="This is Third Component" />
+    <hr />        
 </div>
 @endsection
